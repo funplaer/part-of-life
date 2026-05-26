@@ -2,6 +2,7 @@ package plugin.scripts.core;
 
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 
 import org.bukkit.entity.Player;
@@ -24,7 +25,7 @@ import java.util.UUID;
 
 public class GhostManager implements Listener {
 
-    private static final String GHOST_TEAM = "ghosts";
+    private static final String GHOST_TEAM = "GHOST_TEAM";
 
 
 
@@ -65,12 +66,17 @@ public class GhostManager implements Listener {
     }
 
     public static void updateName(Player player) {
-        player.playerListName(
-                Component.text(player.getName() + " ")
-                        .color(NamedTextColor.GRAY)
-                        .append(Component.text("[МЁРТВ]").color(NamedTextColor.DARK_GRAY))
-        );
+        Scoreboard board = Bukkit.getScoreboardManager().getMainScoreboard();
+
+        Team team = board.getTeam("GHOST_TEAM");
+        if (team == null) {
+            team = board.registerNewTeam("GHOST_TEAM");
+        }
+
+        team.prefix(Component.text("[МЁРТВ] ", NamedTextColor.DARK_RED));
+        team.addEntry(player.getName());
     }
+
 
     //без взаимодействий с блоками
 
@@ -222,8 +228,10 @@ public class GhostManager implements Listener {
         player.setSaturation(20f);
 
 
-        Scoreboard board = player.getServer().getScoreboardManager().getMainScoreboard();
-        Team team = board.getTeam(GHOST_TEAM);
+
+        Scoreboard board = Bukkit.getScoreboardManager().getMainScoreboard();
+        Team team = board.getTeam("GHOST_TEAM");
+
         if (team != null) {
             team.removeEntry(player.getName());
         }
