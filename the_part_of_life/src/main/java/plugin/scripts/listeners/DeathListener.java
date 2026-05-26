@@ -1,6 +1,6 @@
 package plugin.scripts.listeners;
 
-import org.bukkit.GameMode;
+
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.entity.Player;
@@ -9,6 +9,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import plugin.scripts.ThePartOfLife;
+import plugin.scripts.core.GhostManager;
 import plugin.scripts.player.PlayerData;
 
 import java.util.HashSet;
@@ -17,7 +18,7 @@ import java.util.UUID;
 
 public class DeathListener implements Listener {
 
-    private final Set<UUID> toSpectator = new HashSet<>();
+
     private final Set<UUID> toReduceHealth = new HashSet<>();
 
     @EventHandler
@@ -30,7 +31,7 @@ public class DeathListener implements Listener {
         double maxHealth = attr.getBaseValue();
 
         if (maxHealth <= 2.0) {
-            toSpectator.add(player.getUniqueId());
+            GhostManager.makeGhost(player);
             PlayerData.markDead(player.getUniqueId());
         } else {
             toReduceHealth.add(player.getUniqueId());
@@ -42,14 +43,6 @@ public class DeathListener implements Listener {
         Player player = event.getPlayer();
         UUID uuid = player.getUniqueId();
 
-        if (toSpectator.remove(uuid)) {
-            player.getServer().getScheduler().runTask(
-                    ThePartOfLife.getInstance(),
-                    () -> player.setGameMode(GameMode.SPECTATOR)
-            );
-            return;
-        }
-
         if (toReduceHealth.remove(uuid)) {
             player.getServer().getScheduler().runTask(
                     ThePartOfLife.getInstance(),
@@ -59,7 +52,7 @@ public class DeathListener implements Listener {
 
                         double current = attr.getBaseValue();
                         double newValue = Math.max(2.0, current - 2.0);
-                        PlayerData.markAlive(player.getUniqueId());
+                        GhostManager.removeGhost(player); // потом удалить
 
                         attr.setBaseValue(newValue);
 

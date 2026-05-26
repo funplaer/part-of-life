@@ -1,6 +1,7 @@
 package plugin.scripts;
 
 import org.bukkit.plugin.java.JavaPlugin;
+import plugin.scripts.core.GhostManager;
 import plugin.scripts.listeners.DeathListener;
 import plugin.scripts.tab.TabManager;
 
@@ -15,6 +16,8 @@ public class ThePartOfLife extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new DeathListener(), this);
 
         TabManager tabManager = new TabManager();
+        getServer().getPluginManager().registerEvents(new GhostManager(), this);
+
         getServer().getPluginManager().registerEvents(tabManager, this);
         tabManager.startUpdater();
     }
