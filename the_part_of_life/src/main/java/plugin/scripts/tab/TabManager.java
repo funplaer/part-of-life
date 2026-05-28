@@ -13,6 +13,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import plugin.scripts.ThePartOfLife;
 import plugin.scripts.player.PlayerData;
 
+
 public class TabManager implements Listener {
 
     public void startUpdater() {
@@ -55,6 +56,8 @@ public class TabManager implements Listener {
         if (attr == null) return;
 
         int hearts = (int) Math.max(1, Math.round(attr.getBaseValue() / 2.0));
+
+
 
         player.playerListName(
                 Component.text(player.getName() + " ")

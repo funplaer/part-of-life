@@ -32,7 +32,7 @@ public class DeathListener implements Listener {
 
         if (maxHealth <= 2.0) {
             GhostManager.makeGhost(player);
-            PlayerData.markDead(player.getUniqueId());
+
         } else {
             toReduceHealth.add(player.getUniqueId());
         }

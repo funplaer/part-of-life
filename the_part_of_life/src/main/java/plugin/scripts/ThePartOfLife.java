@@ -1,9 +1,12 @@
 package plugin.scripts;
 
 import org.bukkit.plugin.java.JavaPlugin;
+import plugin.scripts.commands.CommandsManager;
 import plugin.scripts.core.GhostManager;
 import plugin.scripts.listeners.DeathListener;
 import plugin.scripts.tab.TabManager;
+
+import java.util.Objects;
 
 public class ThePartOfLife extends JavaPlugin {
 
@@ -20,6 +23,13 @@ public class ThePartOfLife extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(tabManager, this);
         tabManager.startUpdater();
+
+        CommandsManager commandsManager = new CommandsManager();
+
+        Objects.requireNonNull(getCommand("addhealth")).setExecutor(commandsManager);
+        Objects.requireNonNull(getCommand("sethealth")).setExecutor(commandsManager);
+        Objects.requireNonNull(getCommand("realkill")).setExecutor(commandsManager);
+        Objects.requireNonNull(getCommand("respawn")).setExecutor(commandsManager);
     }
 
     public static ThePartOfLife getInstance() {
