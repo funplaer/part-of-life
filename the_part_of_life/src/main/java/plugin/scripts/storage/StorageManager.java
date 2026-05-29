@@ -29,13 +29,6 @@ public class StorageManager {
             scanFolder(datapacksFolder, gson);
         }
 
-        plugin.getLogger().info(
-                "Loaded " +
-                        AdvancementStorage.getAll().size() +
-                        " advancement rewards."
-        );
-        plugin.getLogger().info("Loaded rewards:");
-
         for (var entry : AdvancementStorage.getAll().entrySet()) {
             plugin.getLogger().info(entry.getKey() + " = " + entry.getValue());
         }
