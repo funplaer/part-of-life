@@ -5,8 +5,11 @@ api-version: '1.21'
 authors: [Funplaer (Adept of tea) (Andrey)]
 description: In progress
 website: https://t.me/littlebigcoder
+
 commands:
   addhealth:
   sethealth:
   realkill:
   respawn:
+  showreward:
+    usage: /showreward <advancement>
