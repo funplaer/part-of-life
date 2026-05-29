@@ -6,6 +6,7 @@ import plugin.scripts.commands.PointsCommand;
 import plugin.scripts.core.GhostManager;
 
 import plugin.scripts.core.ShowRewardTab;
+import plugin.scripts.listeners.AdvancementListener;
 import plugin.scripts.listeners.DeathListener;
 import plugin.scripts.storage.StorageManager;
 import plugin.scripts.tab.TabManager;
@@ -31,6 +32,11 @@ public class ThePartOfLife extends JavaPlugin {
         new StorageManager(this).loadRewards();
 
         CommandsManager commandsManager = new CommandsManager();
+
+        getServer().getPluginManager().registerEvents(
+                new AdvancementListener(),
+                this
+        );
 
 
         Objects.requireNonNull(getCommand("addhealth")).setExecutor(commandsManager);

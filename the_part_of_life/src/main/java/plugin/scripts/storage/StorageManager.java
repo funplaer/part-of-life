@@ -5,7 +5,6 @@ import com.google.gson.JsonObject;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.plugin.java.JavaPlugin;
-import  plugin.scripts.storage.AdvancementStorage;
 import java.io.File;
 import java.io.FileReader;
 
@@ -29,9 +28,7 @@ public class StorageManager {
             scanFolder(datapacksFolder, gson);
         }
 
-        for (var entry : AdvancementStorage.getAll().entrySet()) {
-            plugin.getLogger().info(entry.getKey() + " = " + entry.getValue());
-        }
+
     }
 
 

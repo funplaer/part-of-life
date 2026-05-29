@@ -25,6 +25,9 @@ public class PointsCommand implements CommandExecutor {
         Integer reward =
                 AdvancementStorage.getReward(args[0]);
 
+
+
+
         if (reward == null) {
             sender.sendMessage(
                     "Достижение не найдено."
