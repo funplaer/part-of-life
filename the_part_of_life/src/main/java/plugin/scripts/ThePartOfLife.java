@@ -1,10 +1,7 @@
 package plugin.scripts;
 
 import org.bukkit.plugin.java.JavaPlugin;
-import plugin.scripts.commands.AddPointsCommand;
-import plugin.scripts.commands.CommandsManager;
-import plugin.scripts.commands.PointsCommand;
-import plugin.scripts.commands.SetPointsCommand;
+import plugin.scripts.commands.*;
 import plugin.scripts.core.GhostManager;
 
 import plugin.scripts.core.ShowRewardTab;
@@ -53,6 +50,7 @@ public class ThePartOfLife extends JavaPlugin {
         Objects.requireNonNull(getCommand("showreward")).setTabCompleter(new ShowRewardTab());
         Objects.requireNonNull(getCommand("setpoints")).setExecutor(new SetPointsCommand());
         Objects.requireNonNull(getCommand("addpoints")).setExecutor(new AddPointsCommand());
+        Objects.requireNonNull(getCommand("send")).setExecutor(new SendCommand());
     }
 
     public static ThePartOfLife getInstance() {

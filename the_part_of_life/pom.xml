@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.funplaer</groupId>
-    <artifactId>the_part_of_life</artifactId>
+    <artifactId>thepartoflife</artifactId>
     <version>0.4-Progress</version>
     <packaging>jar</packaging>
 

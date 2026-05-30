@@ -1,22 +1,30 @@
-name: the_part_of_life
+name: The-Part-of-Life
 version: '0.4-Progress'
 main: plugin.scripts.ThePartOfLife
 api-version: '1.21'
 authors: [funplaer]
-description: In progress
+description: Experience Minecraft in a whole new way with The Part of Life plugin. Each death will make the game more challenging, but by completing achievements, you'll earn points that you can use to replenish life, resurrect other players, or trade with them.
+  The Part of Life plugin is a great way to bring your server together and breathe new part of life into it.
 website: https://t.me/littlebigcoder
 
 commands:
   addhealth:
+    permission: partoflife.admin
   sethealth:
+    permission: partoflife.admin
   realkill:
+    permission: partoflife.admin
   respawn:
+    permission: partoflife.admin
   showreward:
     usage: /showreward <advancement>
+
   setpoints:
     permission: partoflife.admin
   addpoints:
     permission: partoflife.admin
+  send:
+    usage: /send <player> <points>
 
 permissions:
   partoflife.admin:
