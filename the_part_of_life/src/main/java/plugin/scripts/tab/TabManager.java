@@ -12,6 +12,7 @@ import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import plugin.scripts.ThePartOfLife;
 import plugin.scripts.player.PlayerData;
+import plugin.scripts.storage.PlayerPointsStorage;
 
 
 public class TabManager implements Listener {
@@ -59,10 +60,22 @@ public class TabManager implements Listener {
 
 
 
+        int points =
+                PlayerPointsStorage.getPoints(
+                        player.getUniqueId()
+                );
+
         player.playerListName(
                 Component.text(player.getName() + " ")
                         .color(NamedTextColor.WHITE)
-                        .append(Component.text("❤ " + hearts).color(NamedTextColor.RED))
+                        .append(
+                                Component.text("❤ " + hearts + " ")
+                                        .color(NamedTextColor.RED)
+                        )
+                        .append(
+                                Component.text("★ " + points)
+                                        .color(NamedTextColor.GOLD)
+                        )
         );
     }
 }

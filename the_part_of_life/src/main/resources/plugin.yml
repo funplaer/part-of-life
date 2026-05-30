@@ -1,5 +1,5 @@
 name: the_part_of_life
-version: '0.3-Progress'
+version: '0.4-Progress'
 main: plugin.scripts.ThePartOfLife
 api-version: '1.21'
 authors: [funplaer]
@@ -13,3 +13,11 @@ commands:
   respawn:
   showreward:
     usage: /showreward <advancement>
+  setpoints:
+    permission: partoflife.admin
+  addpoints:
+    permission: partoflife.admin
+
+permissions:
+  partoflife.admin:
+    default: op

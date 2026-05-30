@@ -1,12 +1,13 @@
 package plugin.scripts.listeners;
 
-import org.bukkit.Bukkit;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerAdvancementDoneEvent;
-import net.kyori.adventure.text.Component;
 
+
+import plugin.scripts.storage.PlayerPointsStorage;
 import plugin.scripts.storage.AdvancementStorage;
 
 public class AdvancementListener implements Listener {
@@ -33,15 +34,10 @@ public class AdvancementListener implements Listener {
 
 
         if (reward != 0) {
-            Bukkit.broadcast(
-                    Component.text(
-                            "Игрок " + player.getName()
-                                    + " получил достижение "
-                                    + advancementId
-                                    + ", которое приносит "
-                                    + reward
-                                    + " очков"
-                    )
+
+            PlayerPointsStorage.addPoints(
+                    player.getUniqueId(),
+                    reward
             );
         }
 

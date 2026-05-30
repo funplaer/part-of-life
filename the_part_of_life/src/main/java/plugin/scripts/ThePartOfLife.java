@@ -1,13 +1,16 @@
 package plugin.scripts;
 
 import org.bukkit.plugin.java.JavaPlugin;
+import plugin.scripts.commands.AddPointsCommand;
 import plugin.scripts.commands.CommandsManager;
 import plugin.scripts.commands.PointsCommand;
+import plugin.scripts.commands.SetPointsCommand;
 import plugin.scripts.core.GhostManager;
 
 import plugin.scripts.core.ShowRewardTab;
 import plugin.scripts.listeners.AdvancementListener;
 import plugin.scripts.listeners.DeathListener;
+import plugin.scripts.storage.PlayerPointsManager;
 import plugin.scripts.storage.StorageManager;
 import plugin.scripts.tab.TabManager;
 
@@ -16,6 +19,7 @@ import java.util.Objects;
 public class ThePartOfLife extends JavaPlugin {
 
     private static ThePartOfLife instance;
+    private PlayerPointsManager pointsManager;
 
     @Override
     public void onEnable() {
@@ -37,6 +41,8 @@ public class ThePartOfLife extends JavaPlugin {
                 new AdvancementListener(),
                 this
         );
+        pointsManager = new PlayerPointsManager(this);
+        pointsManager.load();
 
 
         Objects.requireNonNull(getCommand("addhealth")).setExecutor(commandsManager);
@@ -45,9 +51,18 @@ public class ThePartOfLife extends JavaPlugin {
         Objects.requireNonNull(getCommand("respawn")).setExecutor(commandsManager);
         Objects.requireNonNull(getCommand("showreward")).setExecutor(new PointsCommand());
         Objects.requireNonNull(getCommand("showreward")).setTabCompleter(new ShowRewardTab());
+        Objects.requireNonNull(getCommand("setpoints")).setExecutor(new SetPointsCommand());
+        Objects.requireNonNull(getCommand("addpoints")).setExecutor(new AddPointsCommand());
     }
 
     public static ThePartOfLife getInstance() {
         return instance;
+    }
+    @Override
+    public void onDisable() {
+
+        if (pointsManager != null) {
+            pointsManager.save();
+        }
     }
 }

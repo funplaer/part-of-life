@@ -39,6 +39,12 @@ public class CommandsManager implements CommandExecutor {
     }
 
     private boolean addHealth(CommandSender sender, String[] args) {
+        Player player =
+                Bukkit.getPlayerExact(args[0]);
+        if (player == null) {
+            sender.sendMessage("Игрок не найден.");
+            return true;
+        }
 
         if (args.length != 2) {
             sender.sendMessage("§cИспользование: /addhealth <player> <value>");
@@ -75,13 +81,19 @@ public class CommandsManager implements CommandExecutor {
 
         attribute.setBaseValue(newHearts * 2);
 
-        sender.sendMessage("§aИгроку добавлено здоровье. Теперь: "
-                + newHearts + " сердец.");
+        sender.sendMessage("§aИгроку "+ player.getName()+ " добавлено здоровье. Теперь: "
+                + newHearts + " сердец. (действия админа)");
 
         return true;
     }
 
     private boolean setHealth(CommandSender sender, String[] args) {
+        Player player =
+                Bukkit.getPlayerExact(args[0]);
+        if (player == null) {
+            sender.sendMessage("Игрок не найден.");
+            return true;
+        }
 
         if (args.length != 2) {
             sender.sendMessage("§cИспользование: /sethealth <player> <value>");
@@ -120,13 +132,19 @@ public class CommandsManager implements CommandExecutor {
             target.setHealth(hearts * 2);
         }
 
-        sender.sendMessage("§aИгроку установлено "
-                + hearts + " сердец.");
+        sender.sendMessage("§aИгроку "+ player.getName()+" установлено "
+                + hearts + " сердец. (действия админа)");
 
         return true;
     }
 
     private boolean realKill(CommandSender sender, String[] args) {
+        Player player =
+                Bukkit.getPlayerExact(args[0]);
+        if (player == null) {
+            sender.sendMessage("Игрок не найден.");
+            return true;
+        }
 
         if (args.length != 1) {
             sender.sendMessage("§cИспользование: /realkill <player>");
@@ -142,12 +160,19 @@ public class CommandsManager implements CommandExecutor {
 
         GhostManager.makeGhost(target);
 
-        sender.sendMessage("§aИгрок переведен в состояние призрака.");
+
+        sender.sendMessage("§aИгрок "+ player.getName() + " переведен в состояние призрака. (действия админа)");
 
         return true;
     }
 
     private boolean respawn(CommandSender sender, String[] args) {
+        Player player =
+                Bukkit.getPlayerExact(args[0]);
+        if (player == null) {
+            sender.sendMessage("Игрок не найден.");
+            return true;
+        }
 
         if (args.length != 1) {
             sender.sendMessage("§cИспользование: /respawn <player>");
@@ -172,7 +197,7 @@ public class CommandsManager implements CommandExecutor {
 
         target.setHealth(20.0);
 
-        sender.sendMessage("§aИгрок воскрешён.");
+        sender.sendMessage("§aИгрок " + player.getName() + " воскрешён. (действия админа)");
 
         return true;
     }
