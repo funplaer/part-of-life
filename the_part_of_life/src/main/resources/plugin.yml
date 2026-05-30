@@ -2,7 +2,7 @@ name: the_part_of_life
 version: '0.3-Progress'
 main: plugin.scripts.ThePartOfLife
 api-version: '1.21'
-authors: [Funplaer (Adept of tea) (Andrey)]
+authors: [funplaer]
 description: In progress
 website: https://t.me/littlebigcoder
 
