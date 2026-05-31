@@ -26,12 +26,12 @@ public class SendCommand implements CommandExecutor {
     ) {
 
         if (!(sender instanceof Player player)) {
-            sender.sendMessage("Команда только для игроков.");
+            sender.sendMessage("§cКоманда только для игроков.");
             return true;
         }
 
         if (args.length != 2) {
-            sender.sendMessage("/send <player> <points>");
+            sender.sendMessage("§cИспользование: /send <player> <points>");
             return true;
         }
 
@@ -39,12 +39,12 @@ public class SendCommand implements CommandExecutor {
                 Bukkit.getPlayerExact(args[0]);
 
         if (target == null) {
-            player.sendMessage("Игрок не найден.");
+            player.sendMessage("§cИгрок не найден.");
             return true;
         }
 
         if (target.equals(player)) {
-            player.sendMessage("Нельзя отправить очки самому себе.");
+            player.sendMessage("§cНельзя отправить очки самому себе.");
             return true;
         }
 
@@ -53,12 +53,12 @@ public class SendCommand implements CommandExecutor {
         try {
             amount = Integer.parseInt(args[1]);
         } catch (NumberFormatException e) {
-            player.sendMessage("Некорректное число.");
+            player.sendMessage("§cНекорректное число.");
             return true;
         }
 
         if (amount <= 0) {
-            player.sendMessage("Количество должно быть больше 0.");
+            player.sendMessage("§cКоличество должно быть больше 0.");
             return true;
         }
 
@@ -68,7 +68,7 @@ public class SendCommand implements CommandExecutor {
                 );
 
         if (senderPoints < amount) {
-            player.sendMessage("Недостаточно очков.");
+            player.sendMessage("§cНедостаточно очков.");
             return true;
         }
 
@@ -91,14 +91,14 @@ public class SendCommand implements CommandExecutor {
         );
 
         player.sendMessage(
-                "Вы отправили " + received
+                "§eВы отправили " + received
                         + " очков игроку "
                         + target.getName()
                         + ". Комиссия: "
                         + tax
         );
 
-        target.sendMessage(
+        target.sendMessage("§e "+
                 player.getName()
                         + " отправил вам "
                         + received
