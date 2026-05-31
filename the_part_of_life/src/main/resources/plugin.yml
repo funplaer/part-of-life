@@ -1,5 +1,5 @@
 name: The-Part-of-Life
-version: '0.5-Progress'
+version: '0.51-Progress'
 main: plugin.scripts.ThePartOfLife
 api-version: '1.21'
 authors: [funplaer]
@@ -28,6 +28,8 @@ commands:
     usage: /send <player> <points>
   buyhealth:
     usage: /buyhealth
+  reborn:
+    usage: /reborn <player>
 
 
 

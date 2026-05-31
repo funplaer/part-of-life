@@ -104,6 +104,15 @@ public class ConfigCommand
                                     + " до "
                                     + option.getMax()
                     );
+                    if (optionName.equals("reborn_health")
+                            && value % 2 != 0) {
+
+                        sender.sendMessage(
+                                "§cКоличество HP должно быть чётным."
+                        );
+
+                        return true;
+                    }
 
                     return true;
                 }
@@ -127,6 +136,7 @@ public class ConfigCommand
                     return true;
                 }
 
+
                 parsedValue =
                         Boolean.parseBoolean(
                                 args[1]
@@ -145,6 +155,7 @@ public class ConfigCommand
 
             return true;
         }
+
 
         config.setValue(
                 optionName,

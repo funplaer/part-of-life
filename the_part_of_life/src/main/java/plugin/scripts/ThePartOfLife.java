@@ -6,6 +6,7 @@ import plugin.scripts.config.ConfigManager;
 import plugin.scripts.core.GhostManager;
 
 import plugin.scripts.core.HealingManager;
+import plugin.scripts.core.RebornManager;
 import plugin.scripts.core.ShowRewardTab;
 import plugin.scripts.listeners.AdvancementListener;
 import plugin.scripts.listeners.DeathListener;
@@ -63,6 +64,7 @@ public class ThePartOfLife extends JavaPlugin {
         Objects.requireNonNull(getCommand("ptconfig")).setExecutor(new ConfigCommand());
         Objects.requireNonNull(getCommand("buyhealth")).setExecutor(new HealingManager());
         Objects.requireNonNull(getCommand("ptconfig")).setTabCompleter(new ConfigTabCompleter());
+        Objects.requireNonNull(getCommand("reborn")).setExecutor(new RebornManager());
     }
 
     public static ThePartOfLife getInstance() {

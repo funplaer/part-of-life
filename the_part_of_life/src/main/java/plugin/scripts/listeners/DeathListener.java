@@ -32,6 +32,8 @@ public class DeathListener implements Listener {
 
         if (maxHealth <= 2.0) {
             GhostManager.makeGhost(player);
+            player.setFlying(true);
+            player.setAllowFlight(true);
 
         } else {
             toReduceHealth.add(player.getUniqueId());
@@ -52,7 +54,7 @@ public class DeathListener implements Listener {
 
                         double current = attr.getBaseValue();
                         double newValue = Math.max(2.0, current - 2.0);
-                        GhostManager.removeGhost(player); // потом удалить
+
 
                         attr.setBaseValue(newValue);
 

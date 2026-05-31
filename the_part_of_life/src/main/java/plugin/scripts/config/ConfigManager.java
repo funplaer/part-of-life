@@ -22,6 +22,8 @@ public class ConfigManager {
 
     private double transferTax = 0.10;
     private int heartPrice = 50;
+    private int rebornPrice = 300;
+    private int rebornHealth = 10;
 
     public ConfigManager(JavaPlugin plugin) {
         this.plugin = plugin;
@@ -45,9 +47,52 @@ public class ConfigManager {
                         "heart_price",
                         Integer.class,
                         1,
-                        1000000
+                        999999999
                 )
         );
+        options.put(
+                "reborn_price",
+                new ConfigOption(
+                        "reborn_price",
+                        Integer.class,
+                        0,
+                        999999999
+                )
+        );
+
+        options.put(
+                "reborn_health",
+                new ConfigOption(
+                        "reborn_health",
+                        Integer.class,
+                        2,
+                        20
+                )
+        );
+    }
+    private void validateConfig() {
+
+        if (transferTax < 0.0 || transferTax > 0.999999999) {
+
+            transferTax = 0.10;
+        }
+
+        if (heartPrice < 1 || heartPrice > 999999999) {
+
+            heartPrice = 50;
+        }
+
+        if (rebornPrice < 0 || rebornPrice > 999999999) {
+
+            rebornPrice = 300;
+        }
+
+        if (rebornHealth < 2
+                || rebornHealth > 20
+                || rebornHealth % 2 != 0) {
+
+            rebornHealth = 10;
+        }
     }
 
     public void load() {
@@ -86,7 +131,23 @@ public class ConfigManager {
                             json.get("heart_price")
                                     .getAsInt();
                 }
+                if (json.has("reborn_price")) {
+                    rebornPrice =
+                            json.get("reborn_price")
+                                    .getAsInt();
+                }
+
+                if (json.has("reborn_health")) {
+                    rebornHealth =
+                            json.get("reborn_health")
+                                    .getAsInt();
+                }
+                if (rebornHealth % 2 != 0) {
+                    rebornHealth = 10;
+                }
             }
+            validateConfig();
+            save();
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -107,6 +168,15 @@ public class ConfigManager {
             json.addProperty(
                     "heart_price",
                     heartPrice
+            );
+            json.addProperty(
+                    "reborn_price",
+                    rebornPrice
+            );
+
+            json.addProperty(
+                    "reborn_health",
+                    rebornHealth
             );
 
 
@@ -146,6 +216,25 @@ public class ConfigManager {
 
             return true;
         }
+        if (name.equals("reborn_price")) {
+
+            rebornPrice = (Integer) value;
+
+            save();
+            load();
+
+            return true;
+        }
+
+        if (name.equals("reborn_health")) {
+
+            rebornHealth = (Integer) value;
+
+            save();
+            load();
+
+            return true;
+        }
 
         return false;
     }
@@ -165,5 +254,12 @@ public class ConfigManager {
     }
     public Set<String> getOptionNames() {
         return options.keySet();
+    }
+    public int getRebornPrice() {
+        return rebornPrice;
+    }
+
+    public int getRebornHealth() {
+        return rebornHealth;
     }
 }
