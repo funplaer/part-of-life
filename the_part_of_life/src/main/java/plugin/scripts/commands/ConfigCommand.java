@@ -24,7 +24,7 @@ public class ConfigCommand
                 "partoflife.admin")) {
 
             sender.sendMessage(
-                    "Нет прав."
+                    "§cНет прав."
             );
 
             return true;
@@ -33,7 +33,7 @@ public class ConfigCommand
         if (args.length != 2) {
 
             sender.sendMessage(
-                    "/ptconfig <option> <value>"
+                    "§cИспользование: /ptconfig <option> <value>"
             );
 
             return true;
@@ -52,7 +52,7 @@ public class ConfigCommand
         if (option == null) {
 
             sender.sendMessage(
-                    "Переменная не существует."
+                    "§cПеременная не существует."
             );
 
             return true;
@@ -74,7 +74,7 @@ public class ConfigCommand
                         || value > option.getMax()) {
 
                     sender.sendMessage(
-                            "Значение должно быть от "
+                            "§cЗначение должно быть от "
                                     + option.getMin()
                                     + " до "
                                     + option.getMax()
@@ -99,7 +99,7 @@ public class ConfigCommand
                         || value > option.getMax()) {
 
                     sender.sendMessage(
-                            "Значение должно быть от "
+                            "§cЗначение должно быть от "
                                     + option.getMin()
                                     + " до "
                                     + option.getMax()
@@ -121,7 +121,7 @@ public class ConfigCommand
                         .equalsIgnoreCase("false")) {
 
                     sender.sendMessage(
-                            "Допустимо только true или false"
+                            "§cДопустимо только true или false"
                     );
 
                     return true;
@@ -140,7 +140,7 @@ public class ConfigCommand
         } catch (Exception e) {
 
             sender.sendMessage(
-                    "Неверный тип значения."
+                    "§cНеверный тип значения."
             );
 
             return true;
@@ -152,7 +152,7 @@ public class ConfigCommand
         );
 
         sender.sendMessage(
-                "Параметр "
+                "§aПараметр "
                         + optionName
                         + " изменён на "
                         + parsedValue

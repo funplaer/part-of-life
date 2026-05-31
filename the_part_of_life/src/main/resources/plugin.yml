@@ -1,5 +1,5 @@
 name: The-Part-of-Life
-version: '0.4-Progress'
+version: '0.5-Progress'
 main: plugin.scripts.ThePartOfLife
 api-version: '1.21'
 authors: [funplaer]
@@ -20,13 +20,16 @@ commands:
     usage: /showreward <advancement>
   ptconfig:
     permission: partoflife.admin
-
   setpoints:
     permission: partoflife.admin
   addpoints:
     permission: partoflife.admin
   send:
     usage: /send <player> <points>
+  buyhealth:
+    usage: /buyhealth
+
+
 
 permissions:
   partoflife.admin:

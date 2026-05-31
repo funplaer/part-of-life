@@ -10,6 +10,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class ConfigManager {
 
@@ -20,6 +21,7 @@ public class ConfigManager {
     private final File configFile;
 
     private double transferTax = 0.10;
+    private int heartPrice = 50;
 
     public ConfigManager(JavaPlugin plugin) {
         this.plugin = plugin;
@@ -34,7 +36,16 @@ public class ConfigManager {
                         "transfer_tax",
                         Double.class,
                         0.0,
-                        1.0
+                        0.999999999
+                )
+        );
+        options.put(
+                "heart_price",
+                new ConfigOption(
+                        "heart_price",
+                        Integer.class,
+                        1,
+                        1000000
                 )
         );
     }
@@ -70,6 +81,11 @@ public class ConfigManager {
                             json.get("transfer_tax")
                                     .getAsDouble();
                 }
+                if (json.has("heart_price")) {
+                    heartPrice =
+                            json.get("heart_price")
+                                    .getAsInt();
+                }
             }
 
         } catch (Exception e) {
@@ -88,6 +104,11 @@ public class ConfigManager {
                     "transfer_tax",
                     transferTax
             );
+            json.addProperty(
+                    "heart_price",
+                    heartPrice
+            );
+
 
             try (FileWriter writer =
                          new FileWriter(configFile)) {
@@ -116,6 +137,15 @@ public class ConfigManager {
 
             return true;
         }
+        if (name.equals("heart_price")) {
+
+            heartPrice = (Integer) value;
+
+            save();
+            load();
+
+            return true;
+        }
 
         return false;
     }
@@ -129,5 +159,11 @@ public class ConfigManager {
     }
     public ConfigOption getOption(String name) {
         return options.get(name);
+    }
+    public int getHeartPrice() {
+        return heartPrice;
+    }
+    public Set<String> getOptionNames() {
+        return options.keySet();
     }
 }

@@ -5,6 +5,7 @@ import plugin.scripts.commands.*;
 import plugin.scripts.config.ConfigManager;
 import plugin.scripts.core.GhostManager;
 
+import plugin.scripts.core.HealingManager;
 import plugin.scripts.core.ShowRewardTab;
 import plugin.scripts.listeners.AdvancementListener;
 import plugin.scripts.listeners.DeathListener;
@@ -60,6 +61,8 @@ public class ThePartOfLife extends JavaPlugin {
         Objects.requireNonNull(getCommand("addpoints")).setExecutor(new AddPointsCommand());
         Objects.requireNonNull(getCommand("send")).setExecutor(new SendCommand());
         Objects.requireNonNull(getCommand("ptconfig")).setExecutor(new ConfigCommand());
+        Objects.requireNonNull(getCommand("buyhealth")).setExecutor(new HealingManager());
+        Objects.requireNonNull(getCommand("ptconfig")).setTabCompleter(new ConfigTabCompleter());
     }
 
     public static ThePartOfLife getInstance() {
