@@ -2,6 +2,7 @@ package plugin.scripts;
 
 import org.bukkit.plugin.java.JavaPlugin;
 import plugin.scripts.commands.*;
+import plugin.scripts.config.ConfigManager;
 import plugin.scripts.core.GhostManager;
 
 import plugin.scripts.core.ShowRewardTab;
@@ -17,6 +18,10 @@ public class ThePartOfLife extends JavaPlugin {
 
     private static ThePartOfLife instance;
     private PlayerPointsManager pointsManager;
+    private ConfigManager configManager;
+    public ConfigManager getConfigManager() {
+        return configManager;
+    }
 
     @Override
     public void onEnable() {
@@ -40,6 +45,9 @@ public class ThePartOfLife extends JavaPlugin {
         );
         pointsManager = new PlayerPointsManager(this);
         pointsManager.load();
+        configManager = new ConfigManager(this);
+        configManager.load();
+
 
 
         Objects.requireNonNull(getCommand("addhealth")).setExecutor(commandsManager);
@@ -51,6 +59,7 @@ public class ThePartOfLife extends JavaPlugin {
         Objects.requireNonNull(getCommand("setpoints")).setExecutor(new SetPointsCommand());
         Objects.requireNonNull(getCommand("addpoints")).setExecutor(new AddPointsCommand());
         Objects.requireNonNull(getCommand("send")).setExecutor(new SendCommand());
+        Objects.requireNonNull(getCommand("ptconfig")).setExecutor(new ConfigCommand());
     }
 
     public static ThePartOfLife getInstance() {

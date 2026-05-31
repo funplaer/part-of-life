@@ -18,6 +18,8 @@ commands:
     permission: partoflife.admin
   showreward:
     usage: /showreward <advancement>
+  ptconfig:
+    permission: partoflife.admin
 
   setpoints:
     permission: partoflife.admin

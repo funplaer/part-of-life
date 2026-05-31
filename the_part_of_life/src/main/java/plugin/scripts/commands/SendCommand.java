@@ -6,12 +6,16 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import plugin.scripts.ThePartOfLife;
 import plugin.scripts.storage.PlayerPointsStorage;
 
 public class SendCommand implements CommandExecutor {
 
     //комиссия
-    private static final double TAX = 0.10;
+    double taxRate =
+            ThePartOfLife.getInstance()
+                    .getConfigManager()
+                    .getTransferTax();
 
     @Override
     public boolean onCommand(
@@ -70,7 +74,7 @@ public class SendCommand implements CommandExecutor {
 
         int received =
                 (int) Math.floor(
-                        amount * (1.0 - TAX)
+                        amount * (1.0 - taxRate)
                 );
 
         int tax =
