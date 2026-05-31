@@ -11,7 +11,9 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import plugin.scripts.ThePartOfLife;
 import plugin.scripts.core.GhostManager;
+import plugin.scripts.player.PlayerData;
 import plugin.scripts.storage.PlayerPointsStorage;
+import plugin.scripts.storage.PointLogs;
 
 public class RebornManager
         implements CommandExecutor {
@@ -42,9 +44,31 @@ public class RebornManager
 
             return true;
         }
+        if (PlayerData.isDead(
+                player.getUniqueId()
+        )) {
+
+            player.sendMessage(
+                    "§cМёртвые игроки не могут проводить возрождение."
+            );
+
+            return true;
+        }
+
 
         Player target =
                 Bukkit.getPlayer(args[0]);
+
+        if (!PlayerData.isDead(
+                target.getUniqueId()
+        )) {
+
+            player.sendMessage(
+                    "§cЭтот игрок не мёртв."
+            );
+
+            return true;
+        }
 
         if (target == null) {
 
@@ -97,13 +121,7 @@ public class RebornManager
                 points - price
         );
 
-        player.getInventory()
-                .removeItem(
-                        new org.bukkit.inventory.ItemStack(
-                                Material.DRAGON_EGG,
-                                1
-                        )
-                );
+
 
         GhostManager.removeGhost(target);
         for (Player online : Bukkit.getOnlinePlayers()) {
@@ -167,6 +185,15 @@ public class RebornManager
                 player.getName()
                         + " возродил игрока "
                         + target.getName()
+        );
+        PointLogs.log(
+                player.getUniqueId(),
+                player.getName(),
+                "REBORN",
+                "target="
+                        + target.getName()
+                        + ", price="
+                        + price
         );
 
         return true;

@@ -9,6 +9,7 @@ import org.bukkit.entity.Player;
 
 import plugin.scripts.ThePartOfLife;
 import plugin.scripts.storage.PlayerPointsStorage;
+import plugin.scripts.storage.PointLogs;
 
 public class HealingManager
         implements CommandExecutor {
@@ -82,6 +83,13 @@ public class HealingManager
                 "§eВы купили сердце за "
                         + price
                         + " очков."
+        );
+        PointLogs.log(
+                player.getUniqueId(),
+                player.getName(),
+                "BUY_HEART",
+                "price="
+                        + price
         );
 
         return true;

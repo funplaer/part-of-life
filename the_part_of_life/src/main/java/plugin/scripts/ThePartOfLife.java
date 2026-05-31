@@ -11,6 +11,7 @@ import plugin.scripts.core.ShowRewardTab;
 import plugin.scripts.listeners.AdvancementListener;
 import plugin.scripts.listeners.DeathListener;
 import plugin.scripts.storage.PlayerPointsManager;
+import plugin.scripts.storage.PointLogs;
 import plugin.scripts.storage.StorageManager;
 import plugin.scripts.tab.TabManager;
 
@@ -49,6 +50,7 @@ public class ThePartOfLife extends JavaPlugin {
         pointsManager.load();
         configManager = new ConfigManager(this);
         configManager.load();
+        PointLogs.initialize(this);
 
 
 

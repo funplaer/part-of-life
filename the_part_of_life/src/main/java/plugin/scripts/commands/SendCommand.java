@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 
 import plugin.scripts.ThePartOfLife;
 import plugin.scripts.storage.PlayerPointsStorage;
+import plugin.scripts.storage.PointLogs;
 
 public class SendCommand implements CommandExecutor {
 
@@ -96,6 +97,26 @@ public class SendCommand implements CommandExecutor {
                         + target.getName()
                         + ". Комиссия: "
                         + tax
+        );
+        PointLogs.log(
+                player.getUniqueId(),
+                player.getName(),
+                "TRANSFER_SENT",
+                "to="
+                        + target.getName()
+                        + ", amount="
+                        + amount
+                        + ", received="
+                        + received
+        );
+        PointLogs.log(
+                target.getUniqueId(),
+                target.getName(),
+                "TRANSFER_RECEIVED",
+                "from="
+                        + player.getName()
+                        + ", amount="
+                        + received
         );
 
         target.sendMessage("§e "+

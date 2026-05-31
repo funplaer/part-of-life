@@ -17,7 +17,7 @@ public class PointsCommand implements CommandExecutor {
 
         if (args.length != 1) {
             sender.sendMessage(
-                    "/showreward <advancement>"
+                    "§cИспользование: /showreward <advancement>"
             );
             return true;
         }
@@ -30,13 +30,13 @@ public class PointsCommand implements CommandExecutor {
 
         if (reward == null) {
             sender.sendMessage(
-                    "Достижение не найдено."
+                    "§cДостижение не найдено."
             );
             return true;
         }
 
         sender.sendMessage(
-                "Награда: " + reward
+                "§eНаграда: " + reward
         );
 
         return true;

@@ -9,6 +9,7 @@ import org.bukkit.event.player.PlayerAdvancementDoneEvent;
 
 import plugin.scripts.storage.PlayerPointsStorage;
 import plugin.scripts.storage.AdvancementStorage;
+import plugin.scripts.storage.PointLogs;
 
 public class AdvancementListener implements Listener {
 
@@ -39,7 +40,17 @@ public class AdvancementListener implements Listener {
                     player.getUniqueId(),
                     reward
             );
+            PointLogs.log(
+                    player.getUniqueId(),
+                    player.getName(),
+                    "ADVANCEMENT",
+                    "advancement="
+                            + advancementId
+                            + ", points="
+                            + reward
+            );
         }
+
 
 
 

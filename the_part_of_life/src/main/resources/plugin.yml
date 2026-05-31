@@ -1,5 +1,5 @@
 name: The-Part-of-Life
-version: '0.51-Progress'
+version: '0.53-Progress'
 main: plugin.scripts.ThePartOfLife
 api-version: '1.21'
 authors: [funplaer]

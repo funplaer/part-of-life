@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import plugin.scripts.storage.PlayerPointsStorage;
+import plugin.scripts.storage.PointLogs;
 
 public class AddPointsCommand implements CommandExecutor {
 
@@ -55,6 +56,15 @@ public class AddPointsCommand implements CommandExecutor {
                         + " добавлено "
                         + points
                         + " очков. (действия админа)"
+        );
+        PointLogs.log(
+                player.getUniqueId(),
+                player.getName(),
+                "ADMIN-ADDPOINTS",
+                "Admin - ["
+                        + sender.getName() + "]"
+                        + " points - "
+                        + points
         );
 
         return true;

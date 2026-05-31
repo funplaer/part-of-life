@@ -6,7 +6,7 @@
 
     <groupId>org.funplaer</groupId>
     <artifactId>thepartoflife</artifactId>
-    <version>0.51-Progress</version>
+    <version>0.53-Progress</version>
     <packaging>jar</packaging>
 
     <name>the_part_of_life</name>
