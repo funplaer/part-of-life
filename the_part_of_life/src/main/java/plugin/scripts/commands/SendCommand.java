@@ -7,6 +7,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import plugin.scripts.ThePartOfLife;
+import plugin.scripts.player.PlayerData;
 import plugin.scripts.storage.PlayerPointsStorage;
 import plugin.scripts.storage.PointLogs;
 
@@ -26,13 +27,25 @@ public class SendCommand implements CommandExecutor {
             String[] args
     ) {
 
+
         if (!(sender instanceof Player player)) {
             sender.sendMessage("§cКоманда только для игроков.");
             return true;
         }
 
+
         if (args.length != 2) {
             sender.sendMessage("§cИспользование: /send <player> <points>");
+            return true;
+        }
+        if (PlayerData.isDead(
+                player.getUniqueId()
+        )) {
+
+            player.sendMessage(
+                    "§cМёртвые игроки не могут отправлять очки."
+            );
+
             return true;
         }
 
@@ -43,6 +56,17 @@ public class SendCommand implements CommandExecutor {
             player.sendMessage("§cИгрок не найден.");
             return true;
         }
+        if (PlayerData.isDead(
+                target.getUniqueId()
+        )) {
+
+            player.sendMessage(
+                    "§cНельзя отправлять очки мёртвым игрокам."
+            );
+
+            return true;
+        }
+
 
         if (target.equals(player)) {
             player.sendMessage("§cНельзя отправить очки самому себе.");

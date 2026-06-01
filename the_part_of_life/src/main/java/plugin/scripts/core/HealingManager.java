@@ -8,6 +8,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import plugin.scripts.ThePartOfLife;
+import plugin.scripts.player.PlayerData;
 import plugin.scripts.storage.PlayerPointsStorage;
 import plugin.scripts.storage.PointLogs;
 
@@ -35,6 +36,16 @@ public class HealingManager
                 );
 
         if (health == null) {
+            return true;
+        }
+        if (PlayerData.isDead(
+                player.getUniqueId()
+        )) {
+
+            player.sendMessage(
+                    "§cМёртвые игроки не могут купить сердце"
+            );
+
             return true;
         }
 
