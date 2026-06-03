@@ -3,6 +3,7 @@ package plugin.scripts.commands;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import plugin.scripts.LanguageManager;
 import plugin.scripts.storage.AdvancementStorage;
 
 public class PointsCommand implements CommandExecutor {
@@ -17,7 +18,9 @@ public class PointsCommand implements CommandExecutor {
 
         if (args.length != 1) {
             sender.sendMessage(
-                    "§cИспользование: /showreward <advancement>"
+                    "§c"+ LanguageManager.get(
+                            "usage_showreward"
+                    )
             );
             return true;
         }
@@ -30,13 +33,17 @@ public class PointsCommand implements CommandExecutor {
 
         if (reward == null) {
             sender.sendMessage(
-                    "§cДостижение не найдено."
+                    "§c"+LanguageManager.get(
+                            "adv_not_found"
+                    )
             );
             return true;
         }
 
         sender.sendMessage(
-                "§eНаграда: " + reward
+                "§e"+LanguageManager.get(
+                        "reward"
+                ) + reward
         );
 
         return true;

@@ -7,6 +7,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import plugin.scripts.LanguageManager;
 import plugin.scripts.ThePartOfLife;
 import plugin.scripts.player.PlayerData;
 import plugin.scripts.storage.PlayerPointsStorage;
@@ -25,7 +26,9 @@ public class HealingManager
 
         if (!(sender instanceof Player player)) {
             sender.sendMessage(
-                    "§cКоманда только для игроков."
+                    "§c"+ LanguageManager.get(
+                            "only_for_players"
+                    )
             );
             return true;
         }
@@ -43,7 +46,9 @@ public class HealingManager
         )) {
 
             player.sendMessage(
-                    "§cМёртвые игроки не могут купить сердце"
+                    "§c"+ LanguageManager.get(
+                            "dead_cant_buy_heart"
+                    )
             );
 
             return true;
@@ -52,7 +57,9 @@ public class HealingManager
         if (health.getBaseValue() >= 20.0) {
 
             player.sendMessage(
-                    "§cУ вас уже максимальное количество сердец."
+                    "§c"+LanguageManager.get(
+                            "already_full_hearts"
+                    )
             );
 
             return true;
@@ -71,7 +78,9 @@ public class HealingManager
         if (points < price) {
 
             player.sendMessage(
-                    "§cНедостаточно очков. Нужно: "
+                    "§c" + LanguageManager.get(
+                            "no_points_need"
+                    )
                             + price
             );
 
@@ -91,9 +100,13 @@ public class HealingManager
         );
 
         player.sendMessage(
-                "§eВы купили сердце за "
+                "§e"+ LanguageManager.get(
+                        "you_buy_heart"
+                )
                         + price
-                        + " очков."
+                        + LanguageManager.get(
+                        "buyheart_points"
+                )
         );
         PointLogs.log(
                 player.getUniqueId(),

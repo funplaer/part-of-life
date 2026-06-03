@@ -6,6 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import plugin.scripts.LanguageManager;
 import plugin.scripts.storage.PlayerPointsStorage;
 import plugin.scripts.storage.PointLogs;
 
@@ -20,12 +21,16 @@ public class AddPointsCommand implements CommandExecutor {
     ) {
 
         if (!sender.hasPermission("partoflife.admin")) {
-            sender.sendMessage("§cНедостаточно прав.");
+            sender.sendMessage("§c"+LanguageManager.get(
+                    "player_not_admin"
+            ));
             return true;
         }
 
         if (args.length != 2) {
-            sender.sendMessage("§cИспользование: /addpoints <player> <points>");
+            sender.sendMessage("§c"+ LanguageManager.get(
+                    "usage_addpoints"
+            ));
             return true;
         }
 
@@ -33,7 +38,9 @@ public class AddPointsCommand implements CommandExecutor {
                 Bukkit.getPlayerExact(args[0]);
 
         if (player == null) {
-            sender.sendMessage("§cИгрок не найден.");
+            sender.sendMessage("§c"+LanguageManager.get(
+                    "player_not_found"
+            ));
             return true;
         }
 
@@ -42,7 +49,9 @@ public class AddPointsCommand implements CommandExecutor {
         try {
             points = Integer.parseInt(args[1]);
         } catch (NumberFormatException e) {
-            sender.sendMessage("§cНекорректное число.");
+            sender.sendMessage("§c"+ LanguageManager.get(
+                    "wrong_number"
+            ));
             return true;
         }
 
@@ -52,10 +61,16 @@ public class AddPointsCommand implements CommandExecutor {
         );
 
         sender.sendMessage(
-                "§aИгроку " + player.getName()
-                        + " добавлено "
+                "§a"+ LanguageManager.get(
+                        "1_1"
+                ) + player.getName()
+                        + LanguageManager.get(
+                        "1_2"
+                )
                         + points
-                        + " очков. (действия админа)"
+                        + LanguageManager.get(
+                        "1_3"
+                )
         );
         PointLogs.log(
                 player.getUniqueId(),

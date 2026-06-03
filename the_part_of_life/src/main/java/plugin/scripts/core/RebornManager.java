@@ -9,6 +9,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import plugin.scripts.LanguageManager;
 import plugin.scripts.ThePartOfLife;
 import plugin.scripts.core.GhostManager;
 import plugin.scripts.player.PlayerData;
@@ -29,7 +30,9 @@ public class RebornManager
         if (!(sender instanceof Player player)) {
 
             sender.sendMessage(
-                    "§cКоманда только для игроков."
+                    "§c"+ LanguageManager.get(
+                            "only_for_players"
+                    )
             );
 
             return true;
@@ -39,7 +42,9 @@ public class RebornManager
         if (args.length != 1) {
 
             player.sendMessage(
-                    "§cИспользование: /reborn <player>"
+                    "§c" + LanguageManager.get(
+                            "usage_reborn"
+                    )
             );
 
             return true;
@@ -49,7 +54,9 @@ public class RebornManager
         )) {
 
             player.sendMessage(
-                    "§cМёртвые игроки не могут проводить возрождение."
+                    "§c"+LanguageManager.get(
+                            "dead_cant_reborn"
+                    )
             );
 
             return true;
@@ -64,7 +71,9 @@ public class RebornManager
         )) {
 
             player.sendMessage(
-                    "§cЭтот игрок не мёртв."
+                    "§c"+LanguageManager.get(
+                            "player_not_dead"
+                    )
             );
 
             return true;
@@ -73,7 +82,9 @@ public class RebornManager
         if (target == null) {
 
             player.sendMessage(
-                    "§cИгрок не найден."
+                    "§c"+LanguageManager.get(
+                            "player_not_found"
+                    )
             );
 
             return true;
@@ -81,7 +92,9 @@ public class RebornManager
         if (target.equals(player)) {
 
             player.sendMessage(
-                    "§cНельзя возродить самого себя."
+                    "§c"+LanguageManager.get(
+                            "cant_reborn_self"
+                    )
             );
 
             return true;
@@ -100,7 +113,9 @@ public class RebornManager
         if (points < price) {
 
             player.sendMessage(
-                    "§cНедостаточно очков."
+                    "§c"+LanguageManager.get(
+                            "no_points"
+                    )
             );
 
             return true;
@@ -110,7 +125,9 @@ public class RebornManager
                 .contains(Material.DRAGON_EGG)) {
 
             player.sendMessage(
-                    "§cДля возрождения требуется яйцо дракона в инвентаре."
+                    "§c"+LanguageManager.get(
+                            "need_dragon_egg"
+                    )
             );
 
             return true;
@@ -183,7 +200,9 @@ public class RebornManager
 
         Bukkit.broadcastMessage("§6 " +
                 player.getName()
-                        + " возродил игрока "
+                        + LanguageManager.get(
+                        "reborn_player"
+                )
                         + target.getName()
         );
         PointLogs.log(

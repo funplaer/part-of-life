@@ -24,6 +24,8 @@ public class ConfigManager {
     private int heartPrice = 50;
     private int rebornPrice = 300;
     private int rebornHealth = 10;
+    private String language = "en";
+
 
     public ConfigManager(JavaPlugin plugin) {
         this.plugin = plugin;
@@ -67,6 +69,15 @@ public class ConfigManager {
                         Integer.class,
                         2,
                         20
+                )
+        );
+        options.put(
+                "language",
+                new ConfigOption(
+                        "language",
+                        String.class,
+                        0,
+                        0
                 )
         );
     }
@@ -145,6 +156,11 @@ public class ConfigManager {
                 if (rebornHealth % 2 != 0) {
                     rebornHealth = 10;
                 }
+                if (json.has("language")) {
+                    language =
+                            json.get("language")
+                                    .getAsString();
+                }
             }
             validateConfig();
             save();
@@ -177,6 +193,10 @@ public class ConfigManager {
             json.addProperty(
                     "reborn_health",
                     rebornHealth
+            );
+            json.addProperty(
+                    "language",
+                    language
             );
 
 
@@ -236,6 +256,16 @@ public class ConfigManager {
             return true;
         }
 
+        if (name.equals("language")) {
+            language = (String) value;
+
+            save();
+
+            load();
+
+            return true;
+        }
+
         return false;
     }
 
@@ -261,5 +291,8 @@ public class ConfigManager {
 
     public int getRebornHealth() {
         return rebornHealth;
+    }
+    public String getLanguage() {
+        return language;
     }
 }

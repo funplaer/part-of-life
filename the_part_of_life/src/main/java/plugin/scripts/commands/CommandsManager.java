@@ -8,6 +8,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
+import plugin.scripts.LanguageManager;
 import plugin.scripts.core.GhostManager;
 
 public class CommandsManager implements CommandExecutor {
@@ -16,7 +17,9 @@ public class CommandsManager implements CommandExecutor {
     public boolean onCommand( @NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String @NotNull [] args) {
 
         if (!sender.isOp()) {
-            sender.sendMessage("§cНедостаточно прав.");
+            sender.sendMessage("§c"+ LanguageManager.get(
+                    "player_not_admin"
+            ));
             return true;
         }
 
@@ -42,19 +45,25 @@ public class CommandsManager implements CommandExecutor {
         Player player =
                 Bukkit.getPlayerExact(args[0]);
         if (player == null) {
-            sender.sendMessage("Игрок не найден.");
+            sender.sendMessage("§c"+ LanguageManager.get(
+                    "player_not_found"
+            ));
             return true;
         }
 
         if (args.length != 2) {
-            sender.sendMessage("§cИспользование: /addhealth <player> <value>");
+            sender.sendMessage("§c"+ LanguageManager.get(
+                    "usage_addhealth"
+            ));
             return true;
         }
 
         Player target = Bukkit.getPlayer(args[0]);
 
         if (target == null) {
-            sender.sendMessage("§cИгрок не найден.");
+            sender.sendMessage("§c"+LanguageManager.get(
+                    "player_not_found"
+            ));
             return true;
         }
 
@@ -63,7 +72,9 @@ public class CommandsManager implements CommandExecutor {
         try {
             hearts = Integer.parseInt(args[1]);
         } catch (NumberFormatException e) {
-            sender.sendMessage("§cValue должно быть числом.");
+            sender.sendMessage("§c"+LanguageManager.get(
+                    "wrong_number"
+            ));
             return true;
         }
 
@@ -71,7 +82,9 @@ public class CommandsManager implements CommandExecutor {
                 target.getAttribute(Attribute.MAX_HEALTH);
 
         if (attribute == null) {
-            sender.sendMessage("§cНе удалось получить здоровье игрока.");
+            sender.sendMessage("§c"+LanguageManager.get(
+                    "none_health"
+            ));
             return true;
         }
 
@@ -81,8 +94,14 @@ public class CommandsManager implements CommandExecutor {
 
         attribute.setBaseValue(newHearts * 2);
 
-        sender.sendMessage("§aИгроку "+ player.getName()+ " добавлено здоровье. Теперь: "
-                + newHearts + " сердец. (действия админа)");
+        sender.sendMessage("§a"+ LanguageManager.get(
+                "2_1"
+        ) + player.getName()+ LanguageManager.get(
+                "2_2"
+        )
+                + newHearts + LanguageManager.get(
+                "2_3"
+        ));
 
         return true;
     }
@@ -91,19 +110,25 @@ public class CommandsManager implements CommandExecutor {
         Player player =
                 Bukkit.getPlayerExact(args[0]);
         if (player == null) {
-            sender.sendMessage("Игрок не найден.");
+            sender.sendMessage("§c"+ LanguageManager.get(
+                    "player_not_found"
+            ));
             return true;
         }
 
         if (args.length != 2) {
-            sender.sendMessage("§cИспользование: /sethealth <player> <value>");
+            sender.sendMessage("§c"+LanguageManager.get(
+                    "usage_sethealth"
+            ));
             return true;
         }
 
         Player target = Bukkit.getPlayer(args[0]);
 
         if (target == null) {
-            sender.sendMessage("§cИгрок не найден.");
+            sender.sendMessage("§c"+LanguageManager.get(
+                    "player_not_found"
+            ));
             return true;
         }
 
@@ -112,7 +137,9 @@ public class CommandsManager implements CommandExecutor {
         try {
             hearts = Integer.parseInt(args[1]);
         } catch (NumberFormatException e) {
-            sender.sendMessage("§cValue должно быть числом.");
+            sender.sendMessage("§c"+LanguageManager.get(
+                    "wrong_number"
+            ));
             return true;
         }
 
@@ -122,7 +149,9 @@ public class CommandsManager implements CommandExecutor {
                 target.getAttribute(Attribute.MAX_HEALTH);
 
         if (attribute == null) {
-            sender.sendMessage("§cНе удалось получить здоровье игрока.");
+            sender.sendMessage("§c"+LanguageManager.get(
+                    "none_health"
+            ));
             return true;
         }
 
@@ -132,8 +161,14 @@ public class CommandsManager implements CommandExecutor {
             target.setHealth(hearts * 2);
         }
 
-        sender.sendMessage("§aИгроку "+ player.getName()+" установлено "
-                + hearts + " сердец. (действия админа)");
+        sender.sendMessage("§a"+ LanguageManager.get(
+                "3_1"
+        )+ player.getName()+LanguageManager.get(
+                "3_2"
+        )
+                + hearts + LanguageManager.get(
+                "3_3"
+        ));
 
         return true;
     }
@@ -142,26 +177,36 @@ public class CommandsManager implements CommandExecutor {
         Player player =
                 Bukkit.getPlayerExact(args[0]);
         if (player == null) {
-            sender.sendMessage("Игрок не найден.");
+            sender.sendMessage("§c"+LanguageManager.get(
+                    "player_not_found"
+            ));
             return true;
         }
 
         if (args.length != 1) {
-            sender.sendMessage("§cИспользование: /realkill <player>");
+            sender.sendMessage("§c"+ LanguageManager.get(
+                    "usage_realkill"
+            ));
             return true;
         }
 
         Player target = Bukkit.getPlayer(args[0]);
 
         if (target == null) {
-            sender.sendMessage("§cИгрок не найден.");
+            sender.sendMessage("§c"+LanguageManager.get(
+                    "player_not_found"
+            ));
             return true;
         }
 
         GhostManager.makeGhost(target);
 
 
-        sender.sendMessage("§aИгрок "+ player.getName() + " переведен в состояние призрака. (действия админа)");
+        sender.sendMessage("§a"+LanguageManager.get(
+                "4_1"
+        )+ player.getName() + LanguageManager.get(
+                "4_2"
+        ));
 
         return true;
     }
@@ -170,19 +215,25 @@ public class CommandsManager implements CommandExecutor {
         Player player =
                 Bukkit.getPlayerExact(args[0]);
         if (player == null) {
-            sender.sendMessage("Игрок не найден.");
+            sender.sendMessage("§c"+LanguageManager.get(
+                    "player_not_found"
+            ));
             return true;
         }
 
         if (args.length != 1) {
-            sender.sendMessage("§cИспользование: /respawn <player>");
+            sender.sendMessage("§c"+LanguageManager.get(
+                    "usage_respawn"
+            ));
             return true;
         }
 
         Player target = Bukkit.getPlayer(args[0]);
 
         if (target == null) {
-            sender.sendMessage("§cИгрок не найден.");
+            sender.sendMessage("§c"+LanguageManager.get(
+                    "player_not_found"
+            ));
             return true;
         }
 
@@ -197,7 +248,11 @@ public class CommandsManager implements CommandExecutor {
 
         target.setHealth(20.0);
 
-        sender.sendMessage("§aИгрок " + player.getName() + " воскрешён. (действия админа)");
+        sender.sendMessage("§a"+LanguageManager.get(
+                "5_1"
+        ) + player.getName() + LanguageManager.get(
+                "5_2"
+        ));
 
         return true;
     }

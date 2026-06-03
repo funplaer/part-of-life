@@ -19,6 +19,7 @@ import org.bukkit.event.player.*;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
 
+import plugin.scripts.LanguageManager;
 import plugin.scripts.player.PlayerData;
 
 import java.util.UUID;
@@ -73,7 +74,9 @@ public class GhostManager implements Listener {
             team = board.registerNewTeam("GHOST_TEAM");
         }
 
-        team.prefix(Component.text("[МЁРТВ] ", NamedTextColor.DARK_RED));
+        team.prefix(Component.text(LanguageManager.get(
+                "dead_prefix"
+        ), NamedTextColor.DARK_RED));
         team.addEntry(player.getName());
     }
 

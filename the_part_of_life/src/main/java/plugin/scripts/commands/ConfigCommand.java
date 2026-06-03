@@ -3,6 +3,7 @@ package plugin.scripts.commands;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import plugin.scripts.LanguageManager;
 import plugin.scripts.ThePartOfLife;
 import plugin.scripts.config.ConfigManager;
 import plugin.scripts.config.ConfigOption;
@@ -24,7 +25,9 @@ public class ConfigCommand
                 "partoflife.admin")) {
 
             sender.sendMessage(
-                    "§cНет прав."
+                    "§c"+ LanguageManager.get(
+                            "player_not_admin"
+                    )
             );
 
             return true;
@@ -33,7 +36,9 @@ public class ConfigCommand
         if (args.length != 2) {
 
             sender.sendMessage(
-                    "§cИспользование: /ptconfig <option> <value>"
+                    "§c"+LanguageManager.get(
+                            "usage_ptconfig"
+                    )
             );
 
             return true;
@@ -52,7 +57,9 @@ public class ConfigCommand
         if (option == null) {
 
             sender.sendMessage(
-                    "§cПеременная не существует."
+                    "§c"+LanguageManager.get(
+                            "unexpected_var"
+                    )
             );
 
             return true;
@@ -74,9 +81,13 @@ public class ConfigCommand
                         || value > option.getMax()) {
 
                     sender.sendMessage(
-                            "§cЗначение должно быть от "
+                            "§c"+ LanguageManager.get(
+                                    "value_must_be"
+                            )
                                     + option.getMin()
-                                    + " до "
+                                    + LanguageManager.get(
+                                    "to"
+                            )
                                     + option.getMax()
                     );
 
@@ -99,16 +110,22 @@ public class ConfigCommand
                         || value > option.getMax()) {
 
                     sender.sendMessage(
-                            "§cЗначение должно быть от "
+                            "§c"+LanguageManager.get(
+                                    "value_must_be"
+                            )
                                     + option.getMin()
-                                    + " до "
+                                    + LanguageManager.get(
+                                    "to"
+                            )
                                     + option.getMax()
                     );
                     if (optionName.equals("reborn_health")
                             && value % 2 != 0) {
 
                         sender.sendMessage(
-                                "§cКоличество HP должно быть чётным."
+                                "§c"+LanguageManager.get(
+                                        "hp_must_be_even"
+                                )
                         );
 
                         return true;
@@ -130,7 +147,9 @@ public class ConfigCommand
                         .equalsIgnoreCase("false")) {
 
                     sender.sendMessage(
-                            "§cДопустимо только true или false"
+                            "§c"+LanguageManager.get(
+                                    "only_boolean"
+                            )
                     );
 
                     return true;
@@ -150,7 +169,9 @@ public class ConfigCommand
         } catch (Exception e) {
 
             sender.sendMessage(
-                    "§cНеверный тип значения."
+                    "§c"+LanguageManager.get(
+                            "wrong_value_type"
+                    )
             );
 
             return true;
@@ -163,9 +184,13 @@ public class ConfigCommand
         );
 
         sender.sendMessage(
-                "§aПараметр "
+                "§a"+ LanguageManager.get(
+                        "parameter"
+                )
                         + optionName
-                        + " изменён на "
+                        + LanguageManager.get(
+                        "changed_to"
+                )
                         + parsedValue
         );
 

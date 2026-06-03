@@ -6,6 +6,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import plugin.scripts.LanguageManager;
 import plugin.scripts.ThePartOfLife;
 import plugin.scripts.player.PlayerData;
 import plugin.scripts.storage.PlayerPointsStorage;
@@ -29,13 +30,17 @@ public class SendCommand implements CommandExecutor {
 
 
         if (!(sender instanceof Player player)) {
-            sender.sendMessage("§cКоманда только для игроков.");
+            sender.sendMessage("§c"+ LanguageManager.get(
+                    "only_for_players"
+            ));
             return true;
         }
 
 
         if (args.length != 2) {
-            sender.sendMessage("§cИспользование: /send <player> <points>");
+            sender.sendMessage("§c"+ LanguageManager.get(
+                    "usage_send"
+            ));
             return true;
         }
         if (PlayerData.isDead(
@@ -43,7 +48,9 @@ public class SendCommand implements CommandExecutor {
         )) {
 
             player.sendMessage(
-                    "§cМёртвые игроки не могут отправлять очки."
+                    "§c" + LanguageManager.get(
+                            "send_by_dead"
+                    )
             );
 
             return true;
@@ -53,7 +60,9 @@ public class SendCommand implements CommandExecutor {
                 Bukkit.getPlayerExact(args[0]);
 
         if (target == null) {
-            player.sendMessage("§cИгрок не найден.");
+            player.sendMessage("§c"+ LanguageManager.get(
+                    "player_not_found"
+            ));
             return true;
         }
         if (PlayerData.isDead(
@@ -61,7 +70,9 @@ public class SendCommand implements CommandExecutor {
         )) {
 
             player.sendMessage(
-                    "§cНельзя отправлять очки мёртвым игрокам."
+                    "§c" + LanguageManager.get(
+                            "send_to_dead"
+                    )
             );
 
             return true;
@@ -69,7 +80,9 @@ public class SendCommand implements CommandExecutor {
 
 
         if (target.equals(player)) {
-            player.sendMessage("§cНельзя отправить очки самому себе.");
+            player.sendMessage("§c" + LanguageManager.get(
+                    "send_self"
+            ));
             return true;
         }
 
@@ -78,12 +91,16 @@ public class SendCommand implements CommandExecutor {
         try {
             amount = Integer.parseInt(args[1]);
         } catch (NumberFormatException e) {
-            player.sendMessage("§cНекорректное число.");
+            player.sendMessage("§c" + LanguageManager.get(
+                    "wrong_number"
+            ));
             return true;
         }
 
         if (amount <= 0) {
-            player.sendMessage("§cКоличество должно быть больше 0.");
+            player.sendMessage("§c" + LanguageManager.get(
+                    "send_more_zero"
+            ));
             return true;
         }
 
@@ -93,7 +110,9 @@ public class SendCommand implements CommandExecutor {
                 );
 
         if (senderPoints < amount) {
-            player.sendMessage("§cНедостаточно очков.");
+            player.sendMessage("§c" + LanguageManager.get(
+                    "no_points"
+            ));
             return true;
         }
 
@@ -116,10 +135,16 @@ public class SendCommand implements CommandExecutor {
         );
 
         player.sendMessage(
-                "§eВы отправили " + received
-                        + " очков игроку "
+                "§e" + LanguageManager.get(
+                        "you_send"
+                ) + received
+                        + LanguageManager.get(
+                        "points_to"
+                )
                         + target.getName()
-                        + ". Комиссия: "
+                        + LanguageManager.get(
+                        "tax"
+                )
                         + tax
         );
         PointLogs.log(
@@ -143,11 +168,15 @@ public class SendCommand implements CommandExecutor {
                         + received
         );
 
-        target.sendMessage("§e "+
+        target.sendMessage("§e"+
                 player.getName()
-                        + " отправил вам "
+                        + LanguageManager.get(
+                        "send_you"
+                )
                         + received
-                        + " очков."
+                        + LanguageManager.get(
+                        "points"
+                )
         );
 
         return true;

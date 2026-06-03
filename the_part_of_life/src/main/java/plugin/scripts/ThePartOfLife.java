@@ -51,6 +51,13 @@ public class ThePartOfLife extends JavaPlugin {
         configManager = new ConfigManager(this);
         configManager.load();
         PointLogs.initialize(this);
+        LanguageManager.initialize(
+                this,
+                configManager.getLanguage()
+        );
+        getLogger().info(
+                "\u001B[32m To change plugin language, edit language in config.json or with '/ptconfig language <lang>' in minecraft. You can add your own languages by adding the YOURLANG.json file to the plugins/The-Part-of-Life/lang folder.\u001B[0m"
+        );
 
 
 
